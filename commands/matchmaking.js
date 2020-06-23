@@ -115,6 +115,17 @@ export default {
                                 channel.send(users.map(x => x = `<@${x.id}>`).join('')).then(message => message.delete())
 
                             })
+                        } else if (users.length === 0) {
+
+                            const embed = new Discord.RichEmbed()
+
+                            embed.setAuthor(`Requested by ${this.message.author.username}#${this.message.author.discriminator}`, this.message.author.avatarURL)
+                            embed.setFooter(`By ${this.client.user.username} and Ness#9999`, this.client.user.displayAvatarURL)
+                            embed.setTitle(`Error during channel creation:`)
+                            embed.setDescription('Match making cancelled due to zero reactions.')
+
+                            message.channel.send(embed).then(message => setTimeout(() => message.delete(), 5000))
+
                         } else {
 
                             const embed = new Discord.RichEmbed()
