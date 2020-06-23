@@ -31,28 +31,43 @@ export default {
             embed.setAuthor(`Requested by ${this.message.author.username}#${this.message.author.discriminator}`, this.message.author.avatarURL)
             embed.setFooter(`By ${this.client.user.username} and Ness#9999`, this.client.user.displayAvatarURL)
 
-            for (const command of this.client.commands) {
-                const cmd      = command[0],
-                      misc     = command[1],
-                      category = misc.category,
-                      desc     = misc.desc
+            if (this.arguments.length > 0) {
 
-                if (!help[category]) help[category] = []
+                for (let command of this.arguments) {
+                    if (command.startsWith(Config.prefix)) command = command.replace(Config.prefix, '')
+                    const bot_cmd = this.client.commands.get(Array.from(this.client.commands)
+                                                        .map(x => x[0])
+                                                        .filter(x => x.includes(command))[0])
+                    if (bot_cmd) {
+                        embed.addField(`${command.slice(0, 1).toUpperCase() + command.slice(1)} command:`, bot_cmd.desc)
+                    }
+                }
 
-                help[category].push({
-                    command : cmd,
-                    desc    : desc 
-                })
+                
+            } else {
+                for (const command of this.client.commands) {
+                    const cmd      = command[0],
+                          misc     = command[1],
+                          category = misc.category,
+                          desc     = misc.desc
+    
+                    if (!help[category]) help[category] = []
+    
+                    help[category].push({
+                        command : cmd,
+                        desc    : desc 
+                    })
+                }
+    
+                for (const category in help) {
+                    embed.addField(`${category.slice(0, 1).toUpperCase() + category.slice(1)} (${help[category].length} commands)`, '• ' + help[category].map(x => x.command.map(x => '`' + Config.prefix + x + '`').join(' ')).join('\n• '))
+                }
+    
+                embed.addField('Global informations:', `• Prefix: **${Config.prefix}**\n• Developer: Ness#9999\n• Memory usage : ${(process.memoryUsage().heapUsed / 1024 / 1024 / 1024).toFixed(3)} GB\n• Total memory: ${Math.floor(OS.totalmem() / 1000000000) - 1} GB\n• Free memory: ${Math.round(OS.freemem() / 1000000000)} GB\n• Node.js version: ${process.version}\n• Discord.js version: v${Discord.version}`)
+
             }
-
-            for (const category in help) {
-                embed.addField(`${category.slice(0, 1).toUpperCase() + category.slice(1)} (${help[category].length} commands)`, '• ' + help[category].map(x => x.command.map(x => '`' + Config.prefix + x + '`').join(' ')).join('\n• '))
-            }
-
-            embed.addField('Global informations:', `• Prefix: **${Config.prefix}**\n• Developer: Ness#9999\n• Memory usage : ${(process.memoryUsage().heapUsed / 1024 / 1024 / 1024).toFixed(3)} GB\n• Total memory: ${Math.floor(OS.totalmem() / 1000000000) - 1} GB\n• Free memory: ${Math.round(OS.freemem() / 1000000000)} GB\n• Node.js version: ${process.version}\n• Discord.js version: v${Discord.version}`)
 
             this.message.channel.send(embed)
-
 
         }
 
