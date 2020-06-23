@@ -25,11 +25,8 @@ export default {
 
         command () {
             
-            const help  = {
-
-            }
-
-            const embed = new Discord.RichEmbed()
+            const help  = {},
+                  embed = new Discord.RichEmbed()
 
             embed.setAuthor(`Requested by ${this.message.author.username}#${this.message.author.discriminator}`, this.message.author.avatarURL)
             embed.setFooter(`By ${this.client.user.username} and Ness#9999`, this.client.user.displayAvatarURL)
@@ -49,9 +46,7 @@ export default {
             }
 
             for (const category in help) {
-                
-                embed.addField(category.slice(0, 1).toUpperCase() + category.slice(1), help[category].map(x => x.command.map(x => '`' + Config.prefix + x + '`').join(' ')))
-
+                embed.addField(`${category.slice(0, 1).toUpperCase() + category.slice(1)} (${help[category].length} commands)`, '• ' + help[category].map(x => x.command.map(x => '`' + Config.prefix + x + '`').join(' ')).join('\n• '))
             }
 
             embed.addField('Global informations:', `• Prefix: **${Config.prefix}**\n• Developer: Ness#9999\n• Memory usage : ${(process.memoryUsage().heapUsed / 1024 / 1024 / 1024).toFixed(3)} GB\n• Total memory: ${Math.floor(OS.totalmem() / 1000000000) - 1} GB\n• Free memory: ${Math.round(OS.freemem() / 1000000000)} GB\n• Node.js version: ${process.version}\n• Discord.js version: v${Discord.version}`)
