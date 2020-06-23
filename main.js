@@ -38,7 +38,7 @@ class Bot {
                         if (value.default.length === 0) return
 
                         value = value.default
-                        const name     = value.name        ?? PATH.parse(file).base.split('.')[0] ,
+                        const name   = value.name        ?? PATH.parse(file).base.split('.')[0] ,
                             desc     = value.description ?? 'Some description'                  ,
                             category = value.category    ?? 'Some category'                     ,
                             run      = value.run         ?? Object

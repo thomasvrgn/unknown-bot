@@ -7,7 +7,7 @@ import Discord from 'discord.js'
 
 export default {
 
-    name        : 'example',
+    name        : ['example', 'test'],
     description : 'Example command',
     category    : 'example',
 

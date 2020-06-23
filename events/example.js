@@ -23,9 +23,8 @@ export default {
                   command           = destructured.shift()
 
             if (!command.startsWith(Config.prefix)) return
-
             const command_no_prefix = command.slice(Config.prefix.length, command.length).toLowerCase(),
-                  bot_cmd           = client.commands.get(command_no_prefix)
+                  bot_cmd           = client.commands.get(Array.from(client.commands).map(x => x[0]).filter(x => x.includes(command_no_prefix))[0])
 
             if (!bot_cmd) return
             const cmd = new bot_cmd.run(client, destructured.slice(0), message)
