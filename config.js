@@ -8,6 +8,7 @@ export default {
     prefix          : 'b!'                         , // Bot command prefix
     name            : 'YOUR BOT NAME HERE'        , // Bot loading title
     description     : 'YOUR BOT DESCRIPTION HERE' , // Bot loading description
+    status          : 'BLP | %%%prefix%%%help'   ,
     cooldown        : 5000                        , // Bot commands cooldown
     
     color           : '#ff0000'                   , // Bot embed color

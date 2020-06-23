@@ -5,8 +5,6 @@
 
 import Config from '../config'
 
-let cooldown = Date.now()
-
 export default {
     name : 'ready',
 
@@ -16,14 +14,17 @@ export default {
 
         async event (client) {
 
-            client.user.setPresence({
-                status: 'online',
-                game  : {
-                    name : 'BLP | b!help',
-                    type : 'STREAMING',
-                    url: "https://www.twitch.tv/blp"
-                }
-            })
+            setInterval(() => {
+                Config.status = Config.status.split('%%%prefix%%%').join(Config.prefix)
+                client.user.setPresence({
+                    status: 'online',
+                    game  : {
+                        name : Config.status,
+                        type : 'STREAMING',
+                        url: "https://www.twitch.tv/blp"
+                    }
+                })
+            }, 5000)
 
         }
 
