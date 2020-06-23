@@ -7,9 +7,9 @@ import Discord from 'discord.js'
 
 export default {
 
-    name        : ['example', 'test'],
-    description : 'Example command',
-    category    : 'example',
+    name        : ['1vs1', 'matchmaking', 'mm', 'match', 'duel'],
+    description : 'Match making command.',
+    category    : 'duel',
 
     run         : class {
 
