@@ -26,7 +26,7 @@ export default {
             this.message.delete()
 
             let time       = this.arguments.filter(x => x.match(/\d+(\s+)?s((econd)?(s)?)/g) || x.match(/^\d+$/g)),
-                maxUsers   = 1,
+                maxUsers   = 2,
                 users      = [],
                 msg_status = false
 
